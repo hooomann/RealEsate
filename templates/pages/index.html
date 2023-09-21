@@ -1,0 +1,235 @@
+{% extends 'base.html' %} 
+
+{% load humanize %}
+{% load static %}
+
+{% block head %} 
+
+<style>
+
+.tools-show-section{
+  padding: 50px 0 30px;
+    background: #faf8ff;
+    color: #000;
+    min-height: 445px;
+    position: relative;
+
+}
+
+ a.button-style {
+
+  border-radius: 5px;
+  color: white;
+  padding: .6em;
+  margin: 5rem 2rem 2rem 2rem;
+  text-decoration: none;
+  cursor: pointer;
+ 
+}
+
+a.button-style:hover{
+  
+ opacity: 0.7;
+ 
+}
+
+
+.active-cls{
+  opacity: 0.8;
+  border: 2px solid #30caa0;
+  margin-top: 2rem;
+  
+}
+
+.box-button{
+ display: block !important;
+ flex-direction: row !important;
+}
+
+.toolsimages img{
+    width: 18rem;
+    height: 18rem;
+    
+  }
+  #headerid{
+    margin-top: 5rem;
+    padding-bottom: 1.6rem;
+    font-style: oblique;
+    font-size: 1.6rem;
+  }
+
+.button-decoration{
+  border-radius: 0.5rem;
+  margin-top: 1rem;
+}
+</style>
+{% endblock %}
+
+{% block title %} | Welcome {% endblock %}
+
+{% block content %}
+  <!-- Alerts -->
+{% include 'partials/_alerts.html' %}
+<!-- Showcase -->
+<section id="showcase">
+    <div class="container text-center">
+      <div class="home-search p-5">
+        <div class="overlay p-5">
+          <h1 class="display-4 mb-4">
+            Search for your Desired Property
+          </h1>
+          <div class="search">
+            <form action="{% url 'search' %}">
+              
+ 
+              <!-- Form Row 1 -->
+              <div class="form-row">
+                <div class="col-md-4 mb-3">
+                  <label class="sr-only">Keywords</label>
+                  <input type="text" name="keywords" class="form-control"  placeholder="Keyword (Pool, Garage, etc)">
+                </div>
+                <div class="col-md-4 mb-3">
+                  <label class="sr-only">City</label>
+                  <input type="text" name="city" class="form-control" placeholder="City">
+                </div>
+                <div class="col-md-4 mb-3">
+                  <label class="sr-only">State</label>
+                  <select name="state" class="form-control">
+                    <option selected="true" disabled="disabled">State</option>
+                    {% for key,value in state_choices.items %}
+                      <option value="{{ key }}">{{ value }}</option>
+                    {% endfor %}
+                  </select>
+                </div>
+              </div>
+
+
+              <!-- Form Row 2 -->
+              <div class="form-row">
+                <div class="col-md-4 mb-3">
+                  <label class="sr-only">Bedrooms</label>
+                  <select name="bedrooms" class="form-control">
+                    <option selected="true" disabled="disabled">Bedrooms Required</option>
+                    {% for key,value in bedroom_choices.items %}
+                      <option value="{{ key }}">{{ value }}</option>
+                    {% endfor %}
+                  </select>
+                </div>
+                <div class="col-md-4 mb-3">
+                  <label class="sr-only">Intention</label>
+                  <select name="intentions" class="form-control">
+                    <option selected="true" disabled="disabled">Sale or Rent</option>
+                    {% for key,value in intention.items %}
+                      <option value="{{ key }}">{{ value }}</option>
+                    {% endfor %}
+                  </select>
+                </div>
+                <div class="col-md-4 mb-3">
+                  <label class="sr-only">Price</label>
+                  <input type="text" name="price" class="form-control" placeholder="Maximum Price in Rupees" value="{{ values.price }}">
+                </div>
+
+
+              </div>
+              <button class="btn btn-secondary btn-block mt-4" type="submit">Search</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+<br>
+
+
+  <!-- Listings -->
+  <section id="listings" class="py-5">
+    <div class="container">
+     <h3 class="text-center mb-3">Latest Listings</h3>
+      <div class="row">
+        {% if listings %}
+          {% for listing in listings %}
+            <!-- Listing 1 -->
+            <div class="col-md-6 col-lg-4 mb-4 ">
+              <div class="card listing-preview ">
+                <a href="{% url 'listing' listing.id %}" style="text-decoration: none;">
+                <img class="card-img-top" src="{{ listing.photo_main.url }} " alt="" height="200px">
+                <div class="card-img-overlay">
+                  <h2>
+                    <span class="badge badge-secondary text-white">Rs.{{ listing.price | intcomma }}</span>
+                  </h2>
+                  <h4>
+                    <span class="badge badge-secondary text-white">For {{ listing.intention }}</span>
+                  </h4>
+                </div>
+                <div class="card-body">
+                  <div class="listing-heading text-center">
+                    <h4 class="text-primary">{{ listing.title }}</h4>
+                    <p>
+                      <i class="fas fa-map-marker text-secondary"></i> {{ listing.city }} {{ listing.state }}, {{ listing.zipcode }}</p>
+                  </div>
+                  <hr>
+                  <div class="row py-2 text-secondary">
+                    <div class="col-6">
+                      <i class="fas fa-th-large"></i> Sqft: {{ listing.sqft }}</div>
+                    <div class="col-6">
+                      <i class="fas fa-car"></i> Garage: {{ listing.garage }}</div>
+                  </div>
+                  <div class="row py-2 text-secondary">
+                    <div class="col-6">
+                      <i class="fas fa-bed"></i> Bedrooms: {{ listing.bedrooms }}</div>
+                    <div class="col-6">
+                      <i class="fas fa-bath"></i> Bathrooms: {{ listing.bathrooms }}</div>
+                  </div>
+                  <hr>
+                  
+                  <div class="row text-secondary">
+                    <div class="col-6">
+                      <i class="fas fa-user"></i> {{ listing.realtor }}</div>
+                  
+                    <div class="col-6">
+                      <i class="fas fa-clock"></i> {{ listing.list_date | timesince }}</div>
+                  
+                </div>
+                  <hr>
+                  </a>
+                </div>
+              </div>
+            </div>
+          {% endfor %}
+        {% else %}
+          <div class="col-md-12">
+            <p>No Listings Available</p>
+          </div>
+        {% endif %}
+
+      </div>
+  </section>
+
+   <!-- Team -->
+   <section id="team" class="py-5 ">
+    <div class="container ">
+      <h2 class="text-center">Our Team</h2>
+      <div class="row text-center mb-4">
+        {% if realtors %}
+          {% for realtor in realtors %}
+          <div class=" col-md-4 mt-4 mb-4">
+              <img src="{{ realtor.photo.url }}" alt="" class="rounded-circle realtor-img mb-3" >
+              <h4>{{ realtor.name }}</h4>
+              <p class="text-success">
+                <i class="fas fa-award text-success mb-3"></i> Realtor</p>
+              <hr>
+              <p>
+                <i class="fas fa-phone" style="transform: rotateY(180deg);"></i> {{ realtor.phone }}</p>
+              <p>
+                <i class="fas fa-envelope-open"></i> {{ realtor.email }}</p>
+            </div>
+          {% endfor %}
+        {% else %}
+          <div class="col-md-12">
+            <p>No Realtors Available</p>
+          </div>
+        {% endif %}       
+      </div>
+    </div>
+  </section>
+{% endblock %}

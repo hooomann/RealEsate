@@ -1,0 +1,153 @@
+{% extends 'base.html' %} 
+
+{% load static %}
+
+{% block title %} | Services {% endblock %}
+{% block head %}
+<style>
+ .service-box {
+    padding: 15px;
+    margin-bottom: 20px;
+    background-image:url('img/services.png');
+    border: 1px solid #eaeaea;
+    box-shadow: 0 0 35px 0 rgb(0 0 0 / 4%);
+    border-radius: 8px;
+    min-width: 5rem;
+   
+    
+}
+
+
+
+
+
+.icon-cls::before {
+  font-family: "Font Awesome 5 Free";                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+   content: "\f055";
+   display: inline-block;
+   
+   vertical-align:middle;
+   font-weight: 1000;
+   padding-right: 10px;
+   font-size: 4rem;
+   
+   
+  
+} 
+
+
+.backdiv{
+  background-image: radial-gradient(#212121 20%, transparent 20%), radial-gradient(#FAFAFA 20%, transparent 20%);
+  background-color: #E53935;
+  background-position: 0 0, 50px 50px;
+  background-size: 100px 100px;
+}
+
+</style>
+{% endblock %}
+{% block content %}
+<section id="showcase-inner" class="py-2 text-white" style="min-height: 55px !important;">
+    <div class="container">
+      <div class="row text-center">
+        <div class="col-md-12">
+          <h1 class="display-4">Services</h1>
+          <!-- <p class="lead">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sunt, pariatur!</p> -->
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Breadcrumb -->
+  <section id="bc" class="mt-3">
+    <div class="container">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="{% url 'index' %}">
+              <i class="fas fa-home"></i> Home</a>
+          </li>
+          <li class="breadcrumb-item active"> Services</li>
+        </ol>
+      </nav>
+    </div>
+  </section>
+  <!-- cards -->
+
+  <section id="service-back" class="py-5 my-4">
+    <div class="container">
+      <h2 class="text-center"></h2>
+      <div class="row text-center">
+        <div class="col-md-7">
+        <h3 class="text-white">Lorem ipsum dolor sit, amet consectetur adipisicing elit. At, aut.</h3>
+      </div>
+      <div class="col-md-3 mr-auto ml-auto">
+        <img src="{% static 'img/contactus/call.png' %}" height="150px" alt="">
+      </div>
+      </div>
+    </div>
+  </section>
+
+<!-- raw data  -->
+            <div class="container ">
+              
+              <div class="contentBoxx">
+              <h1 class="mb-4">Our Services</h1>
+              <div class="row ">
+              <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12  ">
+              <div class="service-box">
+                <div class="content d-flex">
+                  <div><span class="icon-cls"></span></div> 
+                  <div><strong>Property Identification</strong>
+                    <p>Personalized Need based Research, Site Visits &amp; Locality Trips, Developer Due Diligence, Options Evaluation</p>
+                  </div>
+                </div>
+              </div>
+              </div>
+
+
+                <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12  ">
+                  <div class="service-box">
+                    <div class="content d-flex">
+                      <div><span class="icon-cls"></span></div> 
+                      <div><strong>Property Identification</strong>
+                  <p>Personalized Need based Research, Site Visits &amp; Locality Trips, Developer Due Diligence, Options Evaluation</p>
+                </div>
+                </div>
+                  </div>
+                  </div>
+
+
+                <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12  ">
+                  <div class="service-box">
+                    <div class="content d-flex">
+                      <div><span class="icon-cls"></span></div> 
+                      <div><strong>Property Identification</strong>
+                      <p>Personalized Need based Research, Site Visits &amp; Locality Trips, Developer Due Diligence, Options Evaluation</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+             
+
+              </div>
+              
+
+              <div class="btnbox text-center py-5 ">
+                <a href="{% url 'contactus' %}" class="btn btn-success col-ml-4">Contact Us</a>
+              </div>
+            
+              </div>
+              </div>
+
+
+
+
+
+
+
+
+
+
+
+{% endblock %}

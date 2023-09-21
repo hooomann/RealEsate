@@ -1,0 +1,151 @@
+{% extends 'base.html' %} 
+
+{% load static %}
+{% block head %}
+<style>
+
+
+
+
+  .inner-contact-form{
+    
+    margin: 10px 0 30px 15px;
+    padding-bottom: 20px;
+    background-color: white !important;
+    box-shadow: 0px 0px 10px 0px rgb(199, 199, 199);
+   
+  }
+  
+  .contactimages img{
+    width: 16rem;
+    height: 16rem;
+    
+  }
+  .col-md-4{
+    color: #212529;
+  }
+  .addressBox {
+    padding: 40px;
+    position: relative;
+    border-radius: 8px;
+    background: #10284e;
+    color: white !important;
+
+    background-image: url("{% static '/img/contactus/call.png' %}");
+    background-repeat: no-repeat;
+    
+    background-position: right top  ;
+    background-size: 10rem 10rem; 
+ }
+#white-color{color: white !important;}
+
+ .contact .box {
+    padding: 20px;
+    margin-bottom: 22px;
+    background: #fff;
+    border: 1px solid #eaeaea;
+    box-shadow: 0 0 35px 0 rgb(0 0 0 / 4%);
+    border-radius: 8px;
+    min-height: 165px;
+}
+
+
+
+@media (max-width: 768px) {
+  .inner-contact-form{margin: 10px 0 30px 0px;}}
+
+@media (max-width: 576px) {
+  .inner-contact-form{margin: 10px 0 30px 0px;} }
+
+ 
+  
+  </style>
+{% endblock%}
+{% block title %} | Contact Us {% endblock %}
+
+{% block content %}
+<section id="showcase-inner" class="py-2 text-white" style="min-height: 55px !important;">
+  <div class="container">
+    <div class="row text-center">
+      <div class="col-md-12">
+        <h1 class="display-4 ">Contact Us</h1>
+        <!-- <p class="lead">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sunt, pariatur!</p> -->
+      </div>
+    </div>
+  </div>
+</section>
+
+
+  <!-- Breadcrumb -->
+  <section id="bc" class="mt-3">
+    <div class="container">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="{% url 'index' %}">
+              <i class="fas fa-home"></i> Home</a>
+          </li>
+          <li class="breadcrumb-item active"> Contact Us</li>
+        </ol>
+      </nav>
+    </div>
+  </section>
+  <!-- Alerts -->
+  {% include 'partials/_alerts.html' %}
+
+
+
+
+
+  <!-- Contact Form Start here... -->
+
+      
+
+      <div class="container" >
+        <div class="outer-main ">
+          <div class="row">
+
+            <div class=" inner-contact-form col-xl-4 col-lg-4 col-md-5 col-sm-12 " >
+              <form action="" method="POST" >
+                {% csrf_token %}
+                
+                {{ form.non_field_errors }}
+                {% for field in form %}
+                <div class="mb-1">
+                  
+                  <label  class="form-label mb-0 mt-2">{{field.label_tag}}<span class="text-danger">*</span></label>
+                    
+                    
+                      {{field}}{{field.errors|striptags}}
+                </div>
+                {% endfor %}
+                <button type="submit" class="btn btn-primary form-control mt-4">Submit</button>
+              </form>
+            </div>
+
+           
+
+              <div class=" inner-contact-Text col-xl-7 col-lg-7 col-md-6 col-sm-12 mt-20">
+                <div class="contactimages text-center">
+                  <img src="{% static '/img/contactus/contact.png' %}" alt="">
+                  
+                  <div class="text-center"><small >
+                    You have some doubt related our services,You can contact us.
+                  </small></div>
+
+                  <div class="card mt-3 text-center" >
+                    <div class="card-body">
+                      <h6 class="card-subtitle mb-2 text-muted">We are happy to help you.</h6>
+                      <p class="card-text">Using color to add meaning only provides a visual indication, which will not be conveyed to users of assistive technologies – such as screen readers. Ensure that information denoted by the color is either </p>
+                      <a href="/" class="card-link">Go to Homepage</a>                    
+                    </div>
+                  </div>
+                </div>
+              </div>
+          </div>
+        </div>
+      </div>
+
+
+  
+{% endblock content %}

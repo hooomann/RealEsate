@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+
+{% load humanize %}
+
+<style>
+
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+}
+.row > [class*='col-md-4'] {
+    display: flex;
+    flex-direction: column;
+}
+
+
+</style>
+
+
+{% block title %} | {{ blog.title }} {% endblock %}
+
+{% block content %}
+<section id="showcase-inner" class="py-2 text-white" style="min-height: 55px !important;">
+    <div class="container">
+      <div class="row text-center">
+        <div class="col-md-12">
+          <h1 class="display-4">{{ blog.title }}</h1>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Breadcrumb -->
+  <section id="bc" class="mt-3">
+    <div class="container">
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="{% url 'index' %}">Home</a>
+          </li>
+          <li class="breadcrumb-item">
+            <a href="{% url 'listings' %}">Blogs</a>
+          </li>
+          <li class="breadcrumb-item active">{{ blog.title }}</li>
+        </ol>
+      </nav>
+    </div>
+  </section>
+
+  <!-- Alerts -->
+  {% include 'partials/_alerts.html' %}
+
+  <!--                 BLOG        -->
+  <section  class="py-4">
+    <div class="container">
+      <a href="{% url 'blogs' %}" class="btn btn-light mb-4">Back To Blogs</a>
+      <div class="row">
+        <div class="col-md-9  mr-auto ml-auto mt-auto mb-4 text-center">
+          <h3 class="text-info" >{{ blog.title }}</h3>
+          <img src="{{ blog.thumbnail.url }}" alt="" class="img-main img-fluid mb-3 mt-auto mb-auto">           
+          </div>
+          <div class="col-md-8 mr-auto ml-auto" >
+              
+              <h5 class="text-dark mb-4">{{blog.subheading}}</h5>
+              <p class="text-secondary">{{ blog.article }}</p>
+          </div>
+
+        </div>
+      </div>
+      </section>
+{% endblock %}
